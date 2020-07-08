@@ -1,0 +1,19 @@
+welcome: |
+  Energize Andover launched.
+
+welcome_re: |
+  Energize Andover launched. What would you like to do?
+
+welcome_card: |
+  Energize Andover is an Alexa Skill to check the temperature of rooms and wings in Andover High School.
+
+stop_bye: |
+  Goodbye!
+
+cancel_bye: |
+  OK, goodbye!
+
+help_text: |
+  Energize Andover is an Alexa Skill to check the temperature of rooms and wings in Andover High School.
+  To check the temperature of room 212, say: "Temperature of room 212".
+  To check the average temperature of the north wing of the third floor, say: "Average temperature of north third floor".
