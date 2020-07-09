@@ -16,7 +16,9 @@ def temp_room(room_number) -> float:
     :return: Temperature of room in degrees Fahrenheit
     """
     room_key = data_key.loc[data_key["Label"] == str(room_number)]
-    return bdr.get_value(room_key['Facility'], room_key['Temperature'])[0]  # returns only first item in tuple
+    return bdr.get_value(
+        room_key['Facility'],
+        room_key['Temperature'])[0]  # returns only first item in tuple
 
 
 def temp_wing(floor, wing) -> float:
@@ -28,8 +30,10 @@ def temp_wing(floor, wing) -> float:
     average_temp = 0.0  # type: float
     wing_key = pd.DataFrame()
     # declare lists of wing row ranges
-    floor2 = [[24, 109], [24, 33], [34, 50], [51, 63], [64, 72]]  # all, 201-215, 217-235, 237-253, 255-260
-    floor3 = [[110, 170], [110, 121], [122, 139], [140, 148], [149, 157]]  # all, 301-313, 315-333, 335-351, 353-369
+    floor2 = [[24, 109], [24, 33], [34, 50], [51, 63],
+              [64, 72]]  # all, 201-215, 217-235, 237-253, 255-260
+    floor3 = [[110, 170], [110, 121], [122, 139], [140, 148],
+              [149, 157]]  # all, 301-313, 315-333, 335-351, 353-369
 
     if floor == 2:
         wing_key = data_key.truncate(*(floor2[wing]))

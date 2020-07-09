@@ -8,7 +8,11 @@ INTERNAL_PORT = ''
 
 
 # Request present value and units for the supplied instance
-def get_value(facility, instance, gateway_hostname=PUBLIC_HOSTNAME, gateway_port=INTERNAL_PORT, live=False):
+def get_value(facility,
+              instance,
+              gateway_hostname=PUBLIC_HOSTNAME,
+              gateway_port=INTERNAL_PORT,
+              live=False) -> [float, str]:
     value = None
     units = None
 
@@ -18,10 +22,7 @@ def get_value(facility, instance, gateway_hostname=PUBLIC_HOSTNAME, gateway_port
         # Instance appears to be valid
 
         # Set up request arguments
-        args = {
-            'facility': facility,
-            'instance': instance
-        }
+        args = {'facility': facility, 'instance': instance}
 
         if live:
             args['live'] = True
@@ -36,10 +37,8 @@ def get_value(facility, instance, gateway_hostname=PUBLIC_HOSTNAME, gateway_port
         dc_inst_rsp = dc_rsp['instance_response']
 
         # Extract result from instance response
-        if (dc_inst_rsp['success']):
-
+        if dc_inst_rsp['success']:
             dc_data = dc_inst_rsp['data']
-
             if dc_data['success']:
                 value = dc_data['presentValue']
                 units = dc_data['units']
@@ -48,14 +47,14 @@ def get_value(facility, instance, gateway_hostname=PUBLIC_HOSTNAME, gateway_port
 
 
 # Request multiple values from Building Energy Gateway
-def get_bulk(bulk_request, gateway_hostname=PUBLIC_HOSTNAME, gateway_port=INTERNAL_PORT):
+def get_bulk(bulk_request,
+             gateway_hostname=PUBLIC_HOSTNAME,
+             gateway_port=INTERNAL_PORT):
     bulk_rsp = []
 
     if isinstance(bulk_request, list) and len(bulk_request):
         # Set up request arguments
-        args = {
-            'bulk': json.dumps(bulk_request)
-        }
+        args = {'bulk': json.dumps(bulk_request)}
 
         # Issue request to web service
         gateway_rsp = post_request(gateway_hostname, gateway_port, args)
@@ -77,18 +76,14 @@ def post_request(gateway_hostname, gateway_port, args):
 
     # Set SSL and port fragments
     if gateway_hostname == PUBLIC_HOSTNAME:
-
         if gateway_port:
             s = ''
             port = ':' + gateway_port
         else:
             s = 's'
             port = ''
-
     else:
-
         s = ''
-
         if gateway_port:
             port = ':' + gateway_port
         else:

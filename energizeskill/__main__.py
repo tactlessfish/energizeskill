@@ -20,12 +20,6 @@ ask = Ask(app, '/')
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 
-# Session starter
-#
-# This intent is fired automatically at the point of launch (= when the session starts).
-# Use it to register a state machine for things you want to keep track of, such as what the last intent was, so as to be
-# able to give contextual help.
-
 @ask.on_session_started
 def start_session():
     """
@@ -40,6 +34,7 @@ def start_session():
 # Use it as a way to introduce your Skill and say hello to the user. If you envisage your Skill to work using the
 # one-shot paradigm (i.e. the invocation statement contains all the parameters that are required for returning the
 # result
+
 
 @ask.launch
 def handle_launch():
@@ -57,8 +52,8 @@ def handle_launch():
     welcome_re_text = render_template('welcome_re')
     welcome_card_text = render_template('welcome_card')
 
-    return question(welcome_text).reprompt(welcome_re_text).standard_card(title="Energize Andover",
-                                                                          text=welcome_card_text)
+    return question(welcome_text).reprompt(welcome_re_text).standard_card(
+        title="Energize Andover", text=welcome_card_text)
 
 
 # Built-in intents
@@ -68,6 +63,7 @@ def handle_launch():
 #  or delete them/comment them out.
 #
 # More about built-in intents: http://d.pr/KKyx
+
 
 @ask.intent('AMAZON.StopIntent')
 def handle_stop():
@@ -135,6 +131,7 @@ def start_over():
 #
 # This intention ends the session.
 
+
 @ask.session_ended
 def session_ended():
     """
@@ -154,6 +151,7 @@ def session_ended():
 #
 # These intents handle the app's temperature functionality.
 
+
 @ask.intent('RoomTemperature', convert={'room_number': int})
 def handle_room_temperature(room_number):
     temp = temperature.temp_room(room_number)
@@ -170,7 +168,6 @@ def handle_wing_temperature(wing_string, floor_number):
         wing = 3
     elif wing_string == "south":
         wing = 4
-    print(wing)
     temp = temperature.temp_wing(floor_number, wing)
     return statement("It's {:0.1f} degrees Fahrenheit.".format(temp))
 
