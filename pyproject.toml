@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "energizeskill"
+version = "0.1.0"
+description = "An Alexa Skill to check the temperature of AHS."
+authors = ["Fisher Sun <fisher521.fs@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+zappa = "^0.52.0"
+flask-ask = {url = "https://github.com/johnwheeler/flask-ask/archive/master.zip"}
+requests = "^2.24.0"
+awscli = "^1.18.171"
+pandas = "^1.1.4"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
